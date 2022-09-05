@@ -6,8 +6,24 @@ const routes = [
     children: [
       //{ path: '', component: () => import('pages/IndexPage.vue') },
       { path: '', name: 'loginDefault', component: () => import('pages/PageLogin.vue') },
-      { path: 'login', name: 'login', component: () => import('pages/PageLogin.vue') }
+      { path: 'login', name: 'login', component: () => import('pages/PageLogin.vue') },
+      { path: 'register', name: 'register', component: () => import('pages/PageRegister.vue') },
+      { path: 'email-confirmation', name: 'email-confirmation', component: () => import('pages/PageEmailConfirmation.vue') },
+      { path: 'ForgotPassword', name: 'ForgotPassword', component: () => import('src/pages/PageForgotPassword.vue') },
+      { path: 'resetPassword', name: 'resetPassword', component: () => import('src/pages/PageResetPassword.vue') }
     ]
+  },
+  {
+    path: '/',
+    component: () => import('layouts/ProfileLogin.vue'),
+    children: [
+      { path: 'me', name: 'me', component: () => import('pages/PageMe.vue') },
+
+      //{ path: '', component: () => import('pages/Index.vue') }
+    ],
+    meta:{
+      requiresAuth: true
+    },
   },
 
   // Always leave this as last one,
