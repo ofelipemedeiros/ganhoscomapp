@@ -23,7 +23,7 @@
           />
         </div>
 
-        <div class="full-width q-pt-md ">
+        <div class="full-width q-pt-md">
           <q-btn
             label="Logar com google"
             color="primary"
@@ -63,16 +63,15 @@
 <script>
 import { defineComponent, ref } from "vue";
 import useAuthUser from "src/composables/useAuthUser";
-import useNotify from 'src/composables/useNotify';
+import useNotify from "src/composables/useNotify";
 import { useRouter } from "vue-router";
 
 export default defineComponent({
   name: "PageLogin",
 
   setup() {
-
     const router = useRouter();
-    const { notifyError, notifySuccess } = useNotify()
+    const { notifyError, notifySuccess } = useNotify();
     const { loginWithGoogle, isLoggedIn, login } = useAuthUser();
     const form = ref({
       email: "",
@@ -81,26 +80,24 @@ export default defineComponent({
 
     const handleLogin = async () => {
       try {
-        await login(form.value)
-        router.push({name: 'me'})
+        await login(form.value);
+        router.push({ name: "me" });
       } catch (error) {
-        notifyError(error.message)
+        notifyError(error.message);
       }
     };
 
-    const loginWithSocialProvider = async ()=>{
+    const loginWithSocialProvider = async () => {
       try {
-        await loginWithGoogle("google")
-      } catch (error) {
-
-      }
-    }
+        await loginWithGoogle("google");
+      } catch (error) {}
+    };
 
     return {
       form,
       handleLogin,
       isLoggedIn,
-      loginWithSocialProvider
+      loginWithSocialProvider,
     };
   },
 });
