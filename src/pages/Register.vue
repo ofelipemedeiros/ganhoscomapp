@@ -65,7 +65,7 @@ import useNotify from "src/composables/useNotify";
 import { useRouter } from "vue-router";
 
 export default defineComponent({
-  name: "PageRegister",
+  name: "Register",
 
   setup() {
     const router = useRouter();

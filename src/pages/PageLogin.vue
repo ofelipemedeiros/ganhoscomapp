@@ -52,7 +52,7 @@
             class="full-width"
             flat
             size="sm"
-            to="/forgotPassword"
+            to="/recuperar"
           />
         </div>
       </div>
