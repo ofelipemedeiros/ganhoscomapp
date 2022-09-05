@@ -23,7 +23,7 @@ module.exports = configure(function (/* ctx */) {
     // --> boot files are part of "main.js"
     // https://v2.quasar.dev/quasar-cli/boot-files
     boot: [
-
+      'supabase',
       'axios',
     ],
 
@@ -54,6 +54,10 @@ module.exports = configure(function (/* ctx */) {
       },
 
       vueRouterMode: 'history', // available values: 'hash', 'history'
+      env: {
+        SUPABASE_URL: 'https://flksefsysfgomcuubtzy.supabase.co',
+        SUPABASE_KEY: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZsa3NlZnN5c2Znb21jdXVidHp5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE2NjA4NTU2OTcsImV4cCI6MTk3NjQzMTY5N30.4vuM0cHl7BQWy5JNWektwOyXO16I6FOi0iTN82YCe80'
+      },
       // vueRouterBase,
       // vueDevtools,
       // vueOptionsAPI: false,
