@@ -16,17 +16,28 @@
 <script>
 import { defineComponent } from "vue";
 import { perfilStore } from 'stores/perfilUsuario'
+import useAuthUser from "src/composables/useAuthUser";
 
 export default defineComponent({
   name: "ProfileLogin",
 
   setup() {
+    const nomePerfil = ''
+    const avatarPerfil = ''
+    const { isLoggedIn } = useAuthUser();
+
+    const loadPerfil = async()=>{
+      await isLoggedIn
+      nomePerfil = store.dadosPerfil.full_name
+      avatarPerfil = store.dadosPerfil.avatar_url
+    }
+
     const store = perfilStore()
-    const nomePerfil = store.dadosPerfil.full_name
-    const avatarPerfil = store.dadosPerfil.avatar_url
     return {
+      loadPerfil,
       nomePerfil,
       avatarPerfil
+
 
     };
   },
