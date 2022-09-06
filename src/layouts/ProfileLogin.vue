@@ -32,6 +32,6 @@ export default defineComponent({
       avatarPerfil
     };
 
-  },
+  }
 });
 </script>

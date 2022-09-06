@@ -61,7 +61,7 @@
 </template>
 
 <script>
-import { defineComponent, ref } from "vue";
+import { defineComponent, ref, onMounted } from "vue";
 import useAuthUser from "src/composables/useAuthUser";
 import useNotify from "src/composables/useNotify";
 import { useRouter } from "vue-router";
@@ -77,6 +77,14 @@ export default defineComponent({
       email: "",
       password: "",
     });
+
+    onMounted(() =>{
+      if(isLoggedIn){
+        router.push({ name: 'me'})
+
+      }
+
+    })
 
     const handleLogin = async () => {
       try {
@@ -95,6 +103,7 @@ export default defineComponent({
 
     return {
       form,
+      onMounted,
       handleLogin,
       isLoggedIn,
       loginWithSocialProvider,
