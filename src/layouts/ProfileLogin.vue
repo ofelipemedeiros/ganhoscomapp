@@ -14,7 +14,7 @@
   </q-layout>
 </template>
 <script>
-import { defineComponent } from "vue";
+import { defineComponent, onMounted } from "vue";
 import { perfilStore } from 'stores/perfilUsuario'
 import useAuthUser from "src/composables/useAuthUser";
 
@@ -31,10 +31,13 @@ export default defineComponent({
       nomePerfil = store.dadosPerfil.full_name
       avatarPerfil = store.dadosPerfil.avatar_url
     }
+    onMounted(){
+      loadPerfil()
+    }
 
     const store = perfilStore()
     return {
-      loadPerfil,
+
       nomePerfil,
       avatarPerfil
 
