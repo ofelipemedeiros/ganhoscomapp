@@ -28,8 +28,11 @@ export default route(function (/* { store, ssrContext } */) {
   })
   Router.beforeEach((to)=>{
     const { isLoggedIn } = useAuthUser()
+    console.log(to)
+    if(to.hash.includes('type=bearer')){
+      console.log('bearer')
 
-    console.log(isLoggedIn)
+    }
 
     if (
       to.hash.includes('type=recovery')  &&
