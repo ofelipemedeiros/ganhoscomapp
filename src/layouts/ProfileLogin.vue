@@ -2,10 +2,8 @@
   <q-layout view="lHh Lpr lFf">
     <q-header>
       <q-toolbar>
-        <q-avatar>
-
-        </q-avatar>
-        <q-toolbar-title> {{nomePerfil}} </q-toolbar-title>
+        <q-toolbar-title>  </q-toolbar-title>
+        <q-btn flat round dense icon="logout" />
       </q-toolbar>
     </q-header>
     <q-page-container>
@@ -15,8 +13,8 @@
 </template>
 <script>
 import { defineComponent } from "vue";
-import { perfilStore } from 'stores/perfilUsuario'
-import useAuthUser from "src/composables/useAuthUser";
+import { perfilStore } from "stores/perfilUsuario"
+
 
 export default defineComponent({
   name: "ProfileLogin",
@@ -32,6 +30,6 @@ export default defineComponent({
       avatarPerfil
     };
 
-  }
+  },
 });
 </script>

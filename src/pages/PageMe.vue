@@ -1,4 +1,4 @@
-<template class>
+<template>
   <q-page class="flex flex-center">
     <div >
       <p>Olá, {{ user }}</p>
