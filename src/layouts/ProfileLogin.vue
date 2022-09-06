@@ -3,7 +3,7 @@
     <q-header>
       <q-toolbar>
         <q-toolbar-title>  </q-toolbar-title>
-        <q-btn flat round dense icon="logout" />
+        <q-btn flat round dense icon="logout" @click="deslogar" />
       </q-toolbar>
     </q-header>
     <q-page-container>
@@ -13,21 +13,22 @@
 </template>
 <script>
 import { defineComponent } from "vue";
-import { perfilStore } from "stores/perfilUsuario"
+import useAuthUser from "src/composables/useAuthUser";
+
 
 
 export default defineComponent({
   name: "ProfileLogin",
 
   setup() {
-    const nomePerfil = store.dadosPerfil.full_name
-    const avatarPerfil = store.dadosPerfil.avatar_url
-    const store = perfilStore()
+    const { logout } = useAuthUser()
 
+    const deslogar = async ()=>{
+      await logout()
+    }
 
     return {
-      nomePerfil,
-      avatarPerfil
+      deslogar
     };
 
   },
