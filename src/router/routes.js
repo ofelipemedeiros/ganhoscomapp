@@ -29,7 +29,7 @@ const routes = [
     path: '/',
     component: () => import('layouts/ProfileLogin.vue'),
     children: [
-      { path: 'me', name: 'loginDefault', component: () => import('pages/PageMe.vue') },
+      { path: '', name: 'loginDefault', component: () => import('pages/PageMe.vue') },
 
       //{ path: '', component: () => import('pages/Index.vue') }
     ],
