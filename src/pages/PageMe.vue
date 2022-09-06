@@ -1,6 +1,6 @@
 <template class>
   <q-page class="flex flex-center">
-    <div v-if="user">
+    <div >
       <p>Olá, {{ user }}</p>
 
     </div>

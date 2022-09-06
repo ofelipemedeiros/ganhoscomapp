@@ -1,10 +1,11 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <q-header >
+    <q-header>
       <q-toolbar>
-        <q-toolbar-title>
-          Ganhos aplicativos
-        </q-toolbar-title>
+        <q-avatar>
+          <img :src="avatarPerfil" />
+        </q-avatar>
+        <q-toolbar-title> {{ nomePerfil }} </q-toolbar-title>
       </q-toolbar>
     </q-header>
     <q-page-container>
@@ -13,15 +14,21 @@
   </q-layout>
 </template>
 <script>
-
-import { defineComponent } from 'vue'
+import { defineComponent } from "vue";
+import { perfilStore } from 'stores/perfilUsuario'
 
 export default defineComponent({
-  name: 'ProfileLogin',
+  name: "ProfileLogin",
 
-  setup () {
+  setup() {
+    const store = perfilStore()
+    const nomePerfil = store.dadosPerfil.full_name
+    const avatarPerfil = store.dadosPerfil.avatar_url
     return {
-    }
-  }
-})
+      nomePerfil,
+      avatarPerfil
+
+    };
+  },
+});
 </script>
