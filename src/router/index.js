@@ -27,15 +27,12 @@ export default route(function (/* { store, ssrContext } */) {
     history: createHistory(process.env.VUE_ROUTER_BASE)
   })
   Router.beforeEach((to)=>{
-    const { isLoggedIn } = useAuthUser()
-    console.log(to)
-    if(to.includes('credential')){
-      console.log('existe credential')
 
-    }
-    // if(to.hash.includes('type=bearer')){
-    //   return { name:'me' }
-    // }
+    const { isLoggedIn } = useAuthUser()
+
+     if(to.redirectedFrom != null){
+      console.log('preencheu o provider token')
+     }
 
     if (
       to.hash.includes('type=recovery')  &&
