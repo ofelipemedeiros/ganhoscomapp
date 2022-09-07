@@ -31,7 +31,7 @@ export default route(function (/* { store, ssrContext } */) {
     const router = useRouter();
     const { isLoggedIn } = useAuthUser()
     console.log(to)
-     if(isLoggedIn){
+     if(to.hash.includes('type=bearer')){
        router.push({ name: 'me' })
      }
 
