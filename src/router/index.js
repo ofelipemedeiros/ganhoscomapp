@@ -32,6 +32,7 @@ export default route(function (/* { store, ssrContext } */) {
     const { isLoggedIn } = useAuthUser()
     console.log(to)
      if(to.hash.includes('type=bearer')){
+
        return{ name: 'me' }
      }
 

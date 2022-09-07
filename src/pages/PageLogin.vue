@@ -78,13 +78,13 @@ export default defineComponent({
       password: "",
     });
 
-    // onMounted(() =>{
-    //   if(isLoggedIn){
-    //     router.push({ name: 'me'})
+     onMounted(() =>{
+       if(isLoggedIn){
+         router.push({ name: 'me'})
 
-    //   }
+       }
 
-    // })
+     })
 
     const handleLogin = async () => {
       try {
@@ -103,7 +103,7 @@ export default defineComponent({
 
     return {
       form,
-      //onMounted,
+      onMounted,
       handleLogin,
       isLoggedIn,
       loginWithSocialProvider,
