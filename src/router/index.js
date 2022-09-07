@@ -27,11 +27,10 @@ export default route(function (/* { store, ssrContext } */) {
     history: createHistory(process.env.VUE_ROUTER_BASE)
   })
   Router.beforeEach((to)=>{
-
     const { isLoggedIn } = useAuthUser()
-
-     if(to.redirectedFrom != null){
-      console.log('preencheu o provider token')
+    console.log(to)
+     if(to.hash.includes('type=bearer')){
+       return { name:'me' }
      }
 
     if (
