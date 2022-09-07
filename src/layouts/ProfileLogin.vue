@@ -14,6 +14,7 @@
 <script>
 import { defineComponent } from "vue";
 import useAuthUser from "src/composables/useAuthUser";
+import { supabase } from 'boot/supabase'
 
 
 
@@ -21,10 +22,12 @@ export default defineComponent({
   name: "ProfileLogin",
 
   setup() {
-    const { logout } = useAuthUser()
+    const { logout, user } = useAuthUser()
 
     const deslogar = async ()=>{
       await logout()
+      user.value = null
+
     }
 
     return {
