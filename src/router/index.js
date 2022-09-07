@@ -29,9 +29,13 @@ export default route(function (/* { store, ssrContext } */) {
   Router.beforeEach((to)=>{
     const { isLoggedIn } = useAuthUser()
     console.log(to)
-    if(to.hash.includes('type=bearer')){
-      return { name:'me' }
+    if(to.includes('credential')){
+      console.log('existe credential')
+
     }
+    // if(to.hash.includes('type=bearer')){
+    //   return { name:'me' }
+    // }
 
     if (
       to.hash.includes('type=recovery')  &&
