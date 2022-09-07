@@ -24,9 +24,10 @@ export default defineComponent({
   setup() {
     const { logout, user } = useAuthUser()
 
-    const deslogar = async ()=>{
-      await logout()
+    const deslogar = () =>{
       user.value = null
+      logout()
+
 
     }
 
