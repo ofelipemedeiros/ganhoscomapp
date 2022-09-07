@@ -2,6 +2,7 @@ import { route } from 'quasar/wrappers'
 import useAuthUser from 'src/composables/useAuthUser'
 import { createRouter, createMemoryHistory, createWebHistory, createWebHashHistory } from 'vue-router'
 import routes from './routes'
+import { useRouter } from "vue-router";
 
 /*
  * If not building with SSR mode, you can
@@ -27,10 +28,11 @@ export default route(function (/* { store, ssrContext } */) {
     history: createHistory(process.env.VUE_ROUTER_BASE)
   })
   Router.beforeEach((to)=>{
+    const router = useRouter();
     const { isLoggedIn } = useAuthUser()
     console.log(to)
      if(isLoggedIn){
-       return { name:'me' }
+       router.push({ name: 'me' })
      }
 
     if (
