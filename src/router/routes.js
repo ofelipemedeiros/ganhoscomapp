@@ -23,7 +23,7 @@ const routes = [
       //{ path: '', component: () => import('pages/Index.vue') }
     ],
     meta:{
-      requiresAuth: true
+      requiresAuth: false
     },
   },
 
