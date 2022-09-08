@@ -33,9 +33,9 @@ export default route(function (/* { store, ssrContext } */) {
     console.log(to)
     console.log(to.fullPath)
      if(
-      to.fullPath.includes('type=bearer')
+      to.hash.includes('type=bearer')
      ){
-       return{ name: 'me' }
+       return { name: 'me' }
      }
 
     if (
