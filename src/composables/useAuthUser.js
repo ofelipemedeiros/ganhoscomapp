@@ -17,6 +17,8 @@ export default function useAuthUser() {
     const { user, session, error } = await supabase.auth.signIn(
       {
         provider: 'google'
+      }, {
+        redirectTo: {name: 'me'}
       })
     if (error) throw error
     return user
