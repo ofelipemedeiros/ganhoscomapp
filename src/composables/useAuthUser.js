@@ -18,7 +18,7 @@ export default function useAuthUser() {
       {
         provider: 'google'
       }, {
-        redirectTo: {name: 'me'}
+        redirectTo: `${window.location.origin}/me`
       })
     if (error) throw error
     return user
