@@ -31,10 +31,9 @@ export default route(function (/* { store, ssrContext } */) {
     const router = useRouter();
     const { isLoggedIn } = useAuthUser()
     console.log(to)
-    console.log(to.hash.token_type)
+    console.log(to.fullPath)
      if(
-      to.hash.includes('type=bearer') &&
-      to.name == ''
+      to.fullPath.includes('type=bearer')
      ){
        return{ name: 'me' }
      }
