@@ -32,7 +32,7 @@ export default route(function (/* { store, ssrContext } */) {
     const { isLoggedIn } = useAuthUser()
     console.log(to)
     console.log(to.accessToken)
-     if(to.hash.accessToken!=null){
+     if(to.hash.accessToken!==null){
 
        return{ name: 'me' }
      }
