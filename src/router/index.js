@@ -32,6 +32,9 @@ export default route(function (/* { store, ssrContext } */) {
     const {supabase} = useSupabase()
     const currentUser = supabase.auth.user()
     const requiAuth = to.matched.some(record => record.meta.requiAuth)
+    console.log(to)
+    console.log('current user', currentUser)
+    console.log(to.fullPath)
 
 
     if(requiAuth && !currentUser) next('login')
