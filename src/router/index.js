@@ -28,7 +28,7 @@ export default route(function (/* { store, ssrContext } */) {
     // quasar.conf.js -> build -> publicPath
     history: createHistory(process.env.VUE_ROUTER_BASE)
   })
-  Router.beforeEach((to)=>{
+  Router.beforeEach((to,from,next)=>{
     const router = useRouter();
     const { supabase } = useSupabase()
     const currentUser = supabase.auth.user()
@@ -37,10 +37,7 @@ export default route(function (/* { store, ssrContext } */) {
     console.log(to)
     console.log('current user', currentUser)
     console.log(to.fullPath)
-    if(to.meta.requiresAuth && currentUser){
-      return { name: 'me'}
-
-    }
+    if(to.meta.requiresAuth && currentUser) next ('me')
 
     // else if(){
     //   return { name: 'me'}
