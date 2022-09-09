@@ -3,6 +3,7 @@ import useAuthUser from 'src/composables/useAuthUser'
 import { createRouter, createMemoryHistory, createWebHistory, createWebHashHistory } from 'vue-router'
 import routes from './routes'
 import { useRouter } from "vue-router";
+import useSupabase from 'src/boot/supabase'
 
 /*
  * If not building with SSR mode, you can
@@ -28,9 +29,11 @@ export default route(function (/* { store, ssrContext } */) {
     history: createHistory(process.env.VUE_ROUTER_BASE)
   })
   Router.beforeEach((to)=>{
+    const { supabase } = useSupabase()
     const router = useRouter();
     const { isLoggedIn } = useAuthUser()
     console.log(to)
+    console.log(supabase.auth.api.getUserByCookie())
     console.log(to.fullPath)
      if(
       to.hash.includes('type=bearer')

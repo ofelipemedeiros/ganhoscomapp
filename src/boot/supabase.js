@@ -17,6 +17,7 @@ supabase.auth.onAuthStateChange((event, session) =>{
 })
 
 
+
 export default function useSupabase(){
     return { supabase }
 }
