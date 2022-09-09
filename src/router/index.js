@@ -28,22 +28,25 @@ export default route(function (/* { store, ssrContext } */) {
     // quasar.conf.js -> build -> publicPath
     history: createHistory(process.env.VUE_ROUTER_BASE)
   })
-  Router.beforeEach((to)=>{
-    const { supabase } = useSupabase()
+  Router.beforeEach((to, from , next)=>{
     const router = useRouter();
-    const currentUser = supabase.auth.api.getUserByCookie()
-    const usuarioLogado = supabase.auth.user()
+    const { supabase } = useSupabase()
+    const currentUser = supabase.auth.user()
+
+
+
     const { isLoggedIn } = useAuthUser()
     console.log(to)
     console.log('current user', currentUser)
-    console.log('usuario logado', usuarioLogado)
     console.log(to.fullPath)
+    if(to.meta.requiresAuth && !currentUser) next({name: 'login'})
+    else if(to.meta.requiresAuth && currentUser) next({name: 'me'})
 
-     if(
-      to.hash.includes('type=bearer')
-     ){
-       return { name: 'me' }
-     }
+    //  if(
+    //   to.hash.includes('type=bearer')
+    //  ){
+    //    return { name: 'me' }
+    //  }
 
     if (
       to.hash.includes('type=recovery')  &&
