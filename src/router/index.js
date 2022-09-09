@@ -38,8 +38,8 @@ export default route(function (/* { store, ssrContext } */) {
     console.log(to.fullPath)
 
 
-    if( to.hash==null) next('login')
-    //else if (currentUser) next('me')
+    if(!currentUser) next()
+    else if (requiAuth && currentUser) next('me')
     else next();
 
   })
