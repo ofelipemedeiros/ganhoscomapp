@@ -31,10 +31,12 @@ export default route(function (/* { store, ssrContext } */) {
   Router.beforeEach((to)=>{
     const { supabase } = useSupabase()
     const router = useRouter();
-    const currentUser = supabase.auth.api.getUserByCookie
+    const currentUser = supabase.auth.api.getUserByCookie()
+    const usuarioLogado = supabase.auth.user()
     const { isLoggedIn } = useAuthUser()
     console.log(to)
-    console.log('usuario logado', currentUser)
+    console.log('current user', currentUser)
+    console.log('usuario logado', usuarioLogado)
     console.log(to.fullPath)
 
      if(
