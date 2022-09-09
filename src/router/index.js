@@ -40,7 +40,7 @@ export default route(function (/* { store, ssrContext } */) {
 
     if( requiAuth && !currentUser) next('login')
     else if (!requiAuth && currentUser) next('me')
-    else next();
+    //else next();
 
   })
 
