@@ -33,12 +33,13 @@ export default route(function (/* { store, ssrContext } */) {
     const currentUser = supabase.auth.user()
     const requiAuth = to.matched.some(record => record.meta.requiAuth)
     console.log(to)
+    console.log(to.hash)
     console.log('current user', currentUser)
     console.log(to.fullPath)
 
 
-    if(requiAuth && !currentUser) next('login')
-    else if (currentUser) next('me')
+    if( to.hash==null) next('login')
+    //else if (currentUser) next('me')
     else next();
 
   })
