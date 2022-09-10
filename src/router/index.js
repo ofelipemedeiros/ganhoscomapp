@@ -28,21 +28,36 @@ export default route(function (/* { store, ssrContext } */) {
     // quasar.conf.js -> build -> publicPath
     history: createHistory(process.env.VUE_ROUTER_BASE)
   })
-  Router.beforeEach((to,from,next)=>{
-    const {supabase} = useSupabase()
-    const currentUser = supabase.auth.user()
-    const requiAuth = to.matched.some(record => record.meta.requiAuth)
-    console.log(to)
-    console.log(to.hash)
-    console.log('current user', currentUser)
-    console.log(to.fullPath)
-    if(currentUser) next('me')
-
-    // if( requiAuth && !currentUser) next('login')
-    // else if (!requiAuth && currentUser) next('me')
-    // else next();
-
+  router.beforeEach(async (to, from) => {
+    if (
+      // make sure the user is authenticated
+      isAuthenticated &&
+      // ❗️ Avoid an infinite redirect
+      to.name !== 'Login'
+    ) {
+      // redirect the user to the login page
+      return { name: 'me' }
+    }
   })
+  // Router.beforeEach((to,from,next)=>{
+  //   const {supabase} = useSupabase()
+  //   const currentUser = supabase.auth.user()
+  //   const requiAuth = to.matched.some(record => record.meta.requiAuth)
+  //   console.log(to)
+  //   console.log(to.hash)
+  //   console.log('current user', currentUser)
+  //   console.log(to.fullPath)
+  //   if(
+
+  //   ){
+
+  //   }
+
+  //   // if( requiAuth && !currentUser) next('login')
+  //   // else if (!requiAuth && currentUser) next('me')
+  //   // else next();
+
+  // })
 
   return Router
 })
