@@ -35,13 +35,13 @@ export default route(function (/* { store, ssrContext } */) {
      console.log(to)
      console.log(to.hash)
      console.log('current user', currentUser)
-    if (
-      to.hash==null &&
-      to.name == 'undefined' &&
-      currentUser
-    ) {
 
-      return { name: 'me' }
+    if(
+      requiAuth &&
+      currentUser
+    ){
+      return {name: 'me'}
+
     }
   })
 
