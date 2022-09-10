@@ -35,14 +35,15 @@ export default route(function (/* { store, ssrContext } */) {
      console.log(to)
      console.log(to.hash)
      console.log('current user', currentUser)
-
-    if(
-      requiAuth &&
-      currentUser
-    ){
+     if(
+      to.hash.includes('type=bearer')  &&
+      to.name !== 'me'
+     ){
       return {name: 'me'}
 
-    }
+
+     }
+
   })
 
   return Router
