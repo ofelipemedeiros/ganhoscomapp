@@ -29,6 +29,13 @@ export default route(function (/* { store, ssrContext } */) {
     history: createHistory(process.env.VUE_ROUTER_BASE)
   })
   Router.beforeEach(async (to, from) => {
+    const {supabase} = useSupabase()
+     const currentUser = supabase.auth.user()
+     const requiAuth = to.matched.some(record => record.meta.requiAuth)
+     console.log(to)
+     console.log(to.hash)
+     console.log('current user', currentUser)
+     console.log(to.fullPath)
     if (
       // make sure the user is authenticated
       currentUser &&
