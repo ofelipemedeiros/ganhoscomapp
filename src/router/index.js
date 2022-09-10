@@ -36,11 +36,11 @@ export default route(function (/* { store, ssrContext } */) {
     console.log(to.hash)
     console.log('current user', currentUser)
     console.log(to.fullPath)
+    if(currentUser) next('me')
 
-
-    if( requiAuth && !currentUser) next('login')
-    else if (!requiAuth && currentUser) next('me')
-    else next();
+    // if( requiAuth && !currentUser) next('login')
+    // else if (!requiAuth && currentUser) next('me')
+    // else next();
 
   })
 
