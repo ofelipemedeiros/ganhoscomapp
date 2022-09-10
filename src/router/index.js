@@ -37,7 +37,7 @@ export default route(function (/* { store, ssrContext } */) {
      console.log('current user', currentUser)
     if (
 
-      currentUser.aud.includes('authenticated') &&
+      currentUser &&
       to.name == 'undefined'
     ) {
 
