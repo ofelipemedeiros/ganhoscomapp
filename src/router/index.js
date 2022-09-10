@@ -31,7 +31,7 @@ export default route(function (/* { store, ssrContext } */) {
   Router.beforeEach(async (to, from) => {
     if (
       // make sure the user is authenticated
-      isAuthenticated &&
+      currentUser &&
       // ❗️ Avoid an infinite redirect
       to.name !== 'Login'
     ) {
