@@ -35,36 +35,15 @@ export default route(function (/* { store, ssrContext } */) {
      console.log(to)
      console.log(to.hash)
      console.log('current user', currentUser)
-     console.log(to.fullPath)
     if (
-      // make sure the user is authenticated
-      currentUser &&
-      // ❗️ Avoid an infinite redirect
-      to.name == 'login'
+
+      currentUser.aud.includes('authenticated') &&
+      to.name == 'undefined'
     ) {
-      // redirect the user to the login page
+
       return { name: 'me' }
     }
   })
-  // Router.beforeEach((to,from,next)=>{
-  //   const {supabase} = useSupabase()
-  //   const currentUser = supabase.auth.user()
-  //   const requiAuth = to.matched.some(record => record.meta.requiAuth)
-  //   console.log(to)
-  //   console.log(to.hash)
-  //   console.log('current user', currentUser)
-  //   console.log(to.fullPath)
-  //   if(
-
-  //   ){
-
-  //   }
-
-  //   // if( requiAuth && !currentUser) next('login')
-  //   // else if (!requiAuth && currentUser) next('me')
-  //   // else next();
-
-  // })
 
   return Router
 })
