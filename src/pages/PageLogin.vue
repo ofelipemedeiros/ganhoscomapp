@@ -92,6 +92,7 @@ export default defineComponent({
     const loginWithSocialProvider = async () => {
       try {
         await loginWithGoogle("google");
+        router.push({name: 'me'})
       } catch (error) {}
     };
 
