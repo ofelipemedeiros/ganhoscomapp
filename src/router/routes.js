@@ -24,7 +24,7 @@ const routes = [
   },
 
   {
-    path: '/me',
+    path: '/',
     component: () => import('layouts/ProfileLogin.vue'),
     children: [
       { path: 'me', name: 'me', component: () => import('pages/PageMe.vue') },
