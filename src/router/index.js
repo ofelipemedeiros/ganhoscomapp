@@ -40,7 +40,7 @@ export default route(function (/* { store, ssrContext } */) {
       // make sure the user is authenticated
       currentUser &&
       // ❗️ Avoid an infinite redirect
-      to.name !== 'Login'
+      to.name == 'login'
     ) {
       // redirect the user to the login page
       return { name: 'me' }
