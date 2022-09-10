@@ -28,7 +28,7 @@ export default route(function (/* { store, ssrContext } */) {
     // quasar.conf.js -> build -> publicPath
     history: createHistory(process.env.VUE_ROUTER_BASE)
   })
-  router.beforeEach(async (to, from) => {
+  Router.beforeEach(async (to, from) => {
     if (
       // make sure the user is authenticated
       isAuthenticated &&
