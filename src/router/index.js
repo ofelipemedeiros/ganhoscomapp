@@ -36,9 +36,9 @@ export default route(function (/* { store, ssrContext } */) {
      console.log(to.hash)
      console.log('current user', currentUser)
     if (
-
-      currentUser &&
-      to.name == 'undefined'
+      to.hash==null &&
+      to.name == 'undefined' &&
+      currentUser
     ) {
 
       return { name: 'me' }
