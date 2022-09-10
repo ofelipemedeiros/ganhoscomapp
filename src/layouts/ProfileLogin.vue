@@ -8,6 +8,43 @@
     </q-header>
     <q-page-container>
       <router-view />
+      <q-page-sticky position="bottom-right" :offset="[18, 18]">
+        <q-fab
+          v-model="fabRight"
+          vertical-actions-align="right"
+          color="primary"
+          glossy
+          external-label
+          icon="add_chart"
+          direction="up"
+        >
+          <q-fab-action
+            label-position="left"
+            color="accent"
+            icon="mdi-cash-register"
+            label="Outras Despesas"
+          />
+          <q-fab-action
+            label-position="left"
+            color="orange"
+            icon="mdi-gas-station"
+            label="Abastecimento"
+          />
+          <q-fab-action
+            label-position="left"
+            color="secondary"
+            icon="mdi-oil"
+            label="Manutenção"
+          />
+          <q-fab-action
+            label-position="left"
+            color="primary"
+            to="/ganhos"
+            icon="mdi-cash-multiple"
+            label="Ganho"
+          />
+        </q-fab>
+      </q-page-sticky>
     </q-page-container>
   </q-layout>
 </template>
