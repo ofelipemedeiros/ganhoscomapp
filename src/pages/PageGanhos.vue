@@ -81,6 +81,7 @@
   <script>
 import { defineComponent, ref } from "vue";
 import ProfileLogin from "src/layouts/ProfileLogin.vue";
+import Ganhos from 'src/layouts/Ganhos.vue'
 import { useRouter } from "vue-router";
 
 import useNotify from "src/composables/useNotify";
@@ -138,7 +139,7 @@ export default defineComponent({
       handleSubmit,
     };
   },
-  components: { ProfileLogin },
+  components: { Ganhos },
 });
 </script>
 

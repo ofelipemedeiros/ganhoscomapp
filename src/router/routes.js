@@ -19,8 +19,7 @@ const routes = [
     path: '/',
     component: () => import('layouts/ProfileLogin.vue'),
     children: [
-      { path: 'me', name: 'me', component: () => import('src/pages/PageMe.vue') },
-      { path: 'ganhos', name: 'ganhos', component: () => import('src/pages/PageGanhos.vue') },
+      { path: 'me', name: 'me', component: () => import('src/pages/PageMe.vue') }
 
       //{ path: '', component: () => import('pages/Index.vue') }
     ],
@@ -28,6 +27,19 @@ const routes = [
       requiresAuth: true
     },
   },
+  {
+    path: '/',
+    component: () => import('layouts/Ganhos.vue'),
+    children: [
+      { path: 'ganhos', name: 'ganhos', component: () => import('src/pages/PageGanhos.vue') }
+
+      //{ path: '', component: () => import('pages/Index.vue') }
+    ],
+    meta:{
+      requiresAuth: true
+    },
+  },
+
 
   // Always leave this as last one,
   // but you can also remove it
