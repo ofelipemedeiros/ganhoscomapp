@@ -20,6 +20,7 @@ const routes = [
     component: () => import('layouts/ProfileLogin.vue'),
     children: [
       { path: 'me', name: 'me', component: () => import('src/pages/PageMe.vue') },
+      { path: 'ganhos', name: 'ganhos', component: () => import('src/pages/PageGanhos.vue') },
 
       //{ path: '', component: () => import('pages/Index.vue') }
     ],
