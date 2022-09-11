@@ -1,40 +1,7 @@
 <template>
   <q-page padding>
-    <q-form class="row justify-center">
+    <q-form class="row justify-center" @submit.prevent="handleSubmit">
       <div class="col-md-4 col-sm-6 col-xs-10 q-gutter-y-md">
-        <q-input v-model="form.data">
-          <template v-slot:before>
-            <q-icon name="mdi-calendar-edit" class="cursor-pointer">
-              <q-popup-proxy
-                cover
-                transition-show="scale"
-                transition-hide="scale"
-              >
-                <q-date
-                  v-model="form.data"
-                  mask="YYYY/MM/DD"
-                  :locale="localidade"
-                >
-                  <div class="row items-center justify-end">
-                    <q-btn
-                      v-close-popup
-                      label="Selecionar"
-                      color="primary"
-                      flat
-                    />
-                    <q-btn
-                      v-close-popup
-                      label="Cancelar"
-                      color="primary"
-                      flat
-                    />
-                  </div>
-                </q-date>
-              </q-popup-proxy>
-            </q-icon>
-          </template>
-        </q-input>
-
         <q-select
           v-model="form.tipoGanho"
           :options="opçõesGanho"
@@ -63,85 +30,68 @@
             <q-icon name="mdi-currency-usd" />
           </template>
         </q-input>
-      </div>
-      <div class="full-width q-pt-md">
-        <q-btn
-          label="Adicionar"
-          color="primary"
-          class="full-width"
-          outline
-          rounded
-          type="submit"
-        />
+        <div class="full-width q-pt-md">
+          <q-btn
+            label="Adicionar"
+            color="primary"
+            class="full-width"
+            outline
+            rounded
+            type="submit"
+          />
+        </div>
       </div>
     </q-form>
   </q-page>
 </template>
 
-  <script>
-import { defineComponent, ref } from "vue";
-import ProfileLogin from "src/layouts/ProfileLogin.vue";
-import Ganhos from 'src/layouts/Ganhos.vue'
-import { useRouter } from "vue-router";
-
+<script>
+import { defineComponent, onMounted, ref } from "vue";
+import  useApi  from 'src/composables/useApi'
+import { useRouter } from 'vue-router'
+import useSupabase from 'src/boot/supabase'
+import useAuthUser from "src/composables/useAuthUser";
 import useNotify from "src/composables/useNotify";
-import { date } from "quasar";
 
 export default defineComponent({
   name: "PageGanhos",
   setup() {
-    const timeStamp = Date.now();
-    const formattedString = date.formatDate(timeStamp, "YYYY/MM/DD");
-    const table = "ganhos";
-    const router = useRouter();
-
     const { notifyError, notifySuccess } = useNotify();
+    const { supabase } = useSupabase()
+    const table  = 'ganhosteste'
+    const router = useRouter()
+    const { post } = useApi()
+    const { user } = useAuthUser()
+
     const form = ref({
       tipoGanho: null,
       nomeGanho: null,
       valorGanho: null,
-      data: formattedString,
+      user_id: user.id
     });
 
     const handleSubmit = async () => {
       try {
         await post(table, form.value);
-        console.log(form.value);
-        notifySuccess("Adicionado com sucesso!");
+        notifySuccess('Ganho adicionado com sucesso!')
+        console.log(form.value)
+
         router.push({ name: "me" });
       } catch (error) {
-        notifyError(error.message);
-        console.log(form.value);
+
+        console.log(error.message);
       }
     };
 
     return {
       opçõesGanho: ["Aplicativos", "Corrida Particular", "Gorjeta", "Outros"],
       opçõesApp: ["Uber", "99pop", "indriver"],
-      formattedString,
-      localidade: {
-        days: "Domingo_Segunda_Terça_quarta_quinta_sexta_sabado_domingo".split(
-          "_"
-        ),
-        daysShort: "Dom_Seg_Ter_Qua_Qui_Sex_Sáb".split("_"),
-        months:
-          "Janeiro_Fevereiro_Março_Abril_Maio_Junho_Julho_Agosto_Setembro_Outubro_Novembro_Dezembro".split(
-            "_"
-          ),
-        monthsShort: "Jan_Fev_Marc_Abr_Mai_Jun_Jul_Ago_Set_Out_Nov_Dez".split(
-          "_"
-        ),
-        firstDayOfWeek: 1,
-        format24h: true,
-        pluralDay: "dias",
-      },
       form,
-      handleSubmit,
+      handleSubmit
     };
   },
-  components: { Ganhos },
 });
 </script>
 
-  <style>
+<style>
 </style>

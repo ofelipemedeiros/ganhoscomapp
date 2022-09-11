@@ -1,7 +1,7 @@
 <template>
   <q-page class="flex flex-center">
     <div >
-      <p>Olá, {{ user }}</p>
+      <p>Olá, {{ user.user_metadata.name }}</p>
 
     </div>
   </q-page>

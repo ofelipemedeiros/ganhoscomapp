@@ -9,7 +9,7 @@ const supabase  = createClient(supabaseURL, supabaseKey)
 supabase.auth.onAuthStateChange((event, session) =>{
     const { user } = useAuthUser()
     const store = perfilStore()
-    user.value = session.user.user_metadata.name || null
+    user.value = session.user || null
     store.dadosPerfil = session.user.user_metadata
     console.log('displayname', session.user.user_metadata.name)
     //console.log(user)

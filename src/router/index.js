@@ -31,18 +31,41 @@ export default route(function (/* { store, ssrContext } */) {
   Router.beforeEach(async (to, from) => {
     const {supabase} = useSupabase()
      const currentUser = supabase.auth.user()
+     //const userID = supabase.auth.user().id
+     const { isLoggedIn } = useAuthUser()
      const requiAuth = to.matched.some(record => record.meta.requiAuth)
      console.log(to)
      console.log(to.hash)
+     //console.log('id do usuario',userID)
      console.log('current user', currentUser)
      if(
       to.hash.includes('type=bearer')  &&
       to.name !== 'me'
      ){
       return {name: 'me'}
-
-
      }
+
+     if (
+      to.hash.includes('type=recovery')  &&
+      to.name !== 'resetPassword'
+
+    ){
+      const accessToken = to.hash.split('&')[0]
+      const token = accessToken.replace('#access_token=', '')
+      return { name: 'resetPassword', query: { token }}
+
+
+    }
+
+    if (
+      !isLoggedIn() &&
+      to.meta.requiresAuth &&
+      !Object.keys(to.query).includes('fromEmail')){
+      return { name: 'login'}
+
+    }
+
+
 
   })
 
