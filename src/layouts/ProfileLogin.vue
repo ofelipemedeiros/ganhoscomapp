@@ -2,7 +2,7 @@
   <q-layout view="lHh Lpr lFf">
     <q-header>
       <q-toolbar>
-        <q-toolbar-title>  </q-toolbar-title>
+        <q-toolbar-title> Ganhos com app </q-toolbar-title>
         <q-btn flat round dense icon="logout" @click="deslogar" />
       </q-toolbar>
     </q-header>

@@ -1,7 +1,7 @@
 <template>
   <q-page class="flex flex-center">
     <div>
-      <q-table title="Treats" :rows="dados" :columns="columns" row-key="id" :loading="loading"/>
+      <q-table title="Detalhamento de atividades" :rows="dados" :columns="columns" row-key="id" :loading="loading"/>
     </div>
   </q-page>
 </template>

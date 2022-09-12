@@ -2,6 +2,7 @@
   <q-page padding>
     <q-form class="row justify-center" @submit.prevent="handleSubmit">
       <div class="col-md-4 col-sm-6 col-xs-10 q-gutter-y-md">
+        <Calendario/>
         <q-select
           v-model="form.tipoGanho"
           :options="opçõesGanho"
@@ -52,9 +53,13 @@ import { useRouter } from 'vue-router'
 import useSupabase from 'src/boot/supabase'
 import useAuthUser from "src/composables/useAuthUser";
 import useNotify from "src/composables/useNotify";
+import Calendario from "src/components/Calendario.vue";
 
 export default defineComponent({
   name: "PageGanhos",
+  components:{
+    Calendario
+   },
   setup() {
     const { notifyError, notifySuccess } = useNotify();
     const { supabase } = useSupabase()
@@ -85,7 +90,8 @@ export default defineComponent({
       opçõesGanho: ["Aplicativos", "Corrida Particular", "Gorjeta", "Outros"],
       opçõesApp: ["Uber", "99pop", "indriver"],
       form,
-      handleSubmit
+      handleSubmit,
+
     };
   },
 });
