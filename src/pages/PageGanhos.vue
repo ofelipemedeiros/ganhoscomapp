@@ -74,12 +74,10 @@ export default defineComponent({
       try {
         await post(table, form.value);
         notifySuccess('Ganho adicionado com sucesso!')
-        console.log(form.value)
 
         router.push({ name: "me" });
       } catch (error) {
-
-        console.log(error.message);
+        notifyError(error.message)
       }
     };
 

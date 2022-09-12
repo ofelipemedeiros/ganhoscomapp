@@ -4,6 +4,8 @@ import useAuthUser from './useAuthUser'
 export default function useApi(){
     const {supabase} = useSupabase()
     const { user } = useAuthUser()
+    const usuario = user.value.id
+
 
 
 
@@ -11,6 +13,7 @@ export default function useApi(){
         const { data, error }  = await supabase
         .from(table)
         .select('*')
+        .eq('user_id', `${usuario}` )
         if(error) throw error
         return data
     }
@@ -69,6 +72,7 @@ export default function useApi(){
         getById,
         post,
         update,
-        remove
+        remove,
+        usuario
     }
 }

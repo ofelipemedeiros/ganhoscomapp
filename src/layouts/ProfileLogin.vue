@@ -52,11 +52,15 @@
 import { defineComponent } from "vue";
 import useAuthUser from "src/composables/useAuthUser";
 import { useRouter } from "vue-router";
+import PageMe from "src/pages/PageMe.vue";
 
 
 
 export default defineComponent({
   name: "ProfileLogin",
+  components: {
+    PageMe
+  },
 
   setup() {
     const router = useRouter()
