@@ -4,7 +4,7 @@
         <q-icon name="event" class="cursor-pointer">
           <q-popup-proxy cover transition-show="scale" transition-hide="scale">
             <q-date
-            v-model="dataCalendario"
+
             :locale="localidade"
 
             >
@@ -23,13 +23,7 @@
 <script>
 export default {
   name: 'Calendario',
-  props: {
-    dataCalendario:{
-      type: String,
-      required: true
-    }
 
-  },
   data(){
     return {
         localidade: {

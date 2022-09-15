@@ -2,7 +2,23 @@
   <q-page padding>
     <q-form class="row justify-center" @submit.prevent="handleSubmit">
       <div class="col-md-4 col-sm-6 col-xs-10 q-gutter-y-md">
-        <Calendario/>
+        <q-input v-model="form.dataGanho">
+          <template v-slot:prepend>
+            <q-icon name="event" class="cursor-pointer">
+              <q-popup-proxy
+                cover
+                transition-show="scale"
+                transition-hide="scale"
+              >
+                <q-date v-model="form.dataGanho" :locale="localidade">
+                  <div class="row items-center justify-end">
+                    <q-btn v-close-popup label="Close" color="primary" flat />
+                  </div>
+                </q-date>
+              </q-popup-proxy>
+            </q-icon>
+          </template>
+        </q-input>
         <q-select
           v-model="form.tipoGanho"
           :options="opçõesGanho"
@@ -48,50 +64,68 @@
 
 <script>
 import { defineComponent, onMounted, ref } from "vue";
-import  useApi  from 'src/composables/useApi'
-import { useRouter } from 'vue-router'
-import useSupabase from 'src/boot/supabase'
+import useApi from "src/composables/useApi";
+import { useRouter } from "vue-router";
+import useSupabase from "src/boot/supabase";
 import useAuthUser from "src/composables/useAuthUser";
 import useNotify from "src/composables/useNotify";
-import Calendario from "src/components/Calendario.vue";
+
 
 export default defineComponent({
   name: "PageGanhos",
-  components:{
-    Calendario
-   },
+  components: {
+
+  },
   setup() {
     const { notifyError, notifySuccess } = useNotify();
-    const { supabase } = useSupabase()
-    const table  = 'ganhosteste'
-    const router = useRouter()
-    const { post } = useApi()
-    const { user } = useAuthUser()
+    const { supabase } = useSupabase();
+    const table = "ganhosteste";
+    const router = useRouter();
+    const { post } = useApi();
+    const { user } = useAuthUser();
 
     const form = ref({
       tipoGanho: null,
       nomeGanho: null,
       valorGanho: null,
-      user_id: user.id
+      user_id: user.id,
+      dataGanho: null,
     });
 
     const handleSubmit = async () => {
       try {
         await post(table, form.value);
-        notifySuccess('Ganho adicionado com sucesso!')
+        console.log(form.dataGanho);
+        console.log(form.value);
+        notifySuccess("Ganho adicionado com sucesso!");
 
         router.push({ name: "me" });
       } catch (error) {
-        notifyError(error.message)
+        notifyError(error.message);
       }
     };
 
     return {
+      localidade: {
+        days: "Domingo_Segunda_Terça_quarta_quinta_sexta_sabado_domingo".split(
+          "_"
+        ),
+        daysShort: "Dom_Seg_Ter_Qua_Qui_Sex_Sáb".split("_"),
+        months:
+          "Janeiro_Fevereiro_Março_Abril_Maio_Junho_Julho_Agosto_Setembro_Outubro_Novembro_Dezembro".split(
+            "_"
+          ),
+        monthsShort: "Jan_Fev_Marc_Abr_Mai_Jun_Jul_Ago_Set_Out_Nov_Dez".split(
+          "_"
+        ),
+        firstDayOfWeek: 1,
+        format24h: true,
+        pluralDay: "dias",
+      },
       opçõesGanho: ["Aplicativos", "Corrida Particular", "Gorjeta", "Outros"],
       opçõesApp: ["Uber", "99pop", "indriver"],
       form,
       handleSubmit,
-
     };
   },
 });
