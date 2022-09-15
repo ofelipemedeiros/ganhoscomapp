@@ -1,11 +1,11 @@
 <template>
-  <q-input  v-model="data">
+  <q-input  v-model="{{data}}">
       <template v-slot:prepend>
         <q-icon name="event" class="cursor-pointer">
           <q-popup-proxy cover transition-show="scale" transition-hide="scale">
             <q-date
-            v-model="data"
-            :locale="localidade"
+            v-model="{{data}}"
+
             >
               <div class="row items-center justify-end">
                 <q-btn v-close-popup label="Close" color="primary" flat />
@@ -32,7 +32,7 @@ export default {
   data(){
     return {
       date: ('12/09/2022'),
-      formattedString,
+
         localidade: {
           days: "Domingo_Segunda_Terça_quarta_quinta_sexta_sabado_domingo".split(
             "_"
