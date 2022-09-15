@@ -39,6 +39,16 @@ const routes = [
       requiresAuth: true
     },
   },
+  {
+    path: '/',
+    component: () => import('layouts/ProfileLogin.vue'),
+    children: [
+      { path: 'profile', name: 'profile', component: () => import('src/pages/PageProfile.vue') }
+    ],
+    meta:{
+      requiresAuth: true
+    },
+  },
 
 
   // Always leave this as last one,

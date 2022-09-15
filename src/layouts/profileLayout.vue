@@ -3,7 +3,7 @@
     <q-header  >
       <q-toolbar class="col-xs-12">
         <q-btn push padding="0px" icon="arrow_back" flat  to="/profile"/>
-        <q-toolbar-title>Ganhos</q-toolbar-title>
+        <q-toolbar-title>profile</q-toolbar-title>
         <q-space/>
         <q-btn flat round dense icon="logout" @click="deslogar" />
       </q-toolbar>
@@ -21,7 +21,7 @@ import { defineComponent, ref } from 'vue'
 
 
 export default defineComponent({
-  name: 'Ganhos',
+  name: 'profileLayout',
 
 
 

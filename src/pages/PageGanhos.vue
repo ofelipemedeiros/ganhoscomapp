@@ -89,17 +89,14 @@ export default defineComponent({
       nomeGanho: null,
       valorGanho: null,
       user_id: user.id,
-      dataGanho: null,
+      dataGanho:''
     });
 
     const handleSubmit = async () => {
       try {
         await post(table, form.value);
-        console.log(form.dataGanho);
-        console.log(form.value);
         notifySuccess("Ganho adicionado com sucesso!");
-
-        router.push({ name: "me" });
+        router.push({ name: "profile" });
       } catch (error) {
         notifyError(error.message);
       }
