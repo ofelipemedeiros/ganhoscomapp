@@ -1,10 +1,10 @@
 <template>
-  <q-input  v-model="date" mask="date" :rules="['date']">
+  <q-input  v-model="data">
       <template v-slot:prepend>
         <q-icon name="event" class="cursor-pointer">
           <q-popup-proxy cover transition-show="scale" transition-hide="scale">
             <q-date
-            v-model="date"
+            v-model="data"
             :locale="localidade"
             >
               <div class="row items-center justify-end">
@@ -22,6 +22,13 @@
 <script>
 export default {
   name: 'Calendario',
+  props: {
+    data:{
+      type: String,
+      required: true
+    }
+
+  },
   data(){
     return {
       date: ('12/09/2022'),
