@@ -31,7 +31,7 @@ export default {
   },
   data(){
     return {
-      date: ('12/09/2022'),
+
 
         localidade: {
           days: "Domingo_Segunda_Terça_quarta_quinta_sexta_sabado_domingo".split(
