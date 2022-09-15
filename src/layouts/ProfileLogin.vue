@@ -27,6 +27,7 @@
           <q-fab-action
             label-position="left"
             color="orange"
+            to="/abastecimento"
             icon="mdi-gas-station"
             label="Abastecimento"
           />

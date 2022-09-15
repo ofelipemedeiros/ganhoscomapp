@@ -41,6 +41,18 @@ const routes = [
   },
   {
     path: '/',
+    component: () => import('layouts/AbastecimentoL.vue'),
+    children: [
+      { path: 'abastecimento', name: 'abastecimento', component: () => import('src/pages/PageAbastecimento.vue') }
+
+      //{ path: '', component: () => import('pages/Index.vue') }
+    ],
+    meta:{
+      requiresAuth: true
+    },
+  },
+  {
+    path: '/',
     component: () => import('layouts/ProfileLogin.vue'),
     children: [
       { path: 'profile', name: 'profile', component: () => import('src/pages/PageProfile.vue') }

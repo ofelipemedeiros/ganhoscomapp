@@ -6,6 +6,7 @@
       <q-timeline-entry v-for="dado in dados" :key="dado.id"
         :title="dado.tipoGanho"
         :subtitle="dado.dataGanho"
+        icon="mdi-cash"
       >
         <div>
           {{dado.nomeGanho}}
