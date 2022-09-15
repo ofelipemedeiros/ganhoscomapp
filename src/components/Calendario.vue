@@ -31,8 +31,6 @@ export default {
   },
   data(){
     return {
-
-
         localidade: {
           days: "Domingo_Segunda_Terça_quarta_quinta_sexta_sabado_domingo".split(
             "_"
@@ -50,6 +48,7 @@ export default {
           pluralDay: "dias",
     }
   }
+}
 
 }
 </script>
