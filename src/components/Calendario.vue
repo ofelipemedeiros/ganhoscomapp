@@ -5,6 +5,7 @@
           <q-popup-proxy cover transition-show="scale" transition-hide="scale">
             <q-date
             v-model="dataCalendario"
+            :locale="localidade"
 
             >
               <div class="row items-center justify-end">
