@@ -36,9 +36,9 @@ export default route(function (/* { store, ssrContext } */) {
     console.log('current user', currentUser)
     if (
       to.hash.includes('type=bearer') &&
-      to.name !== 'me'
+      to.name !== 'profile'
     ) {
-      return { name: 'me' }
+      return { name: 'profile' }
     }
 
     if (
