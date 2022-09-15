@@ -1,10 +1,10 @@
 <template>
-  <q-input  v-model="{{data}}">
+  <q-input  v-model="{data}">
       <template v-slot:prepend>
         <q-icon name="event" class="cursor-pointer">
           <q-popup-proxy cover transition-show="scale" transition-hide="scale">
             <q-date
-            v-model="{{data}}"
+            v-model="{data}"
 
             >
               <div class="row items-center justify-end">
