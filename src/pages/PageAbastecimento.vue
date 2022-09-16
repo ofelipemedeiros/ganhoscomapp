@@ -85,7 +85,7 @@ export default defineComponent({
     const handleSubmit = async () => {
       try {
         await post(table, form.value);
-        notifySuccess("Ganho adicionado com sucesso!");
+        notifySuccess("Combustivel adicionado!");
         router.push({ name: "profile" });
       } catch (error) {
         notifyError(error.message);

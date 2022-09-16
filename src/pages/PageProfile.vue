@@ -1,25 +1,43 @@
 <template>
-  <q-page class="flex flex-center">
-    <div>
-      <q-timeline layout="comfortable" color="secondary" >
-
-      <q-timeline-entry v-for="dado in dados" :key="dado.id"
-        :title="dado.tipoGanho"
-        :subtitle="dado.dataGanho"
-        icon="mdi-cash"
-      >
-        <div>
-          {{dado.nomeGanho}}
-        </div>
-        <div>
-          {{dado.valorGanho}}
-        </div>
-
-      </q-timeline-entry>
-      </q-timeline>
-
+  <div class="column">
+    <div class="col">
+      <q-tabs v-model="currentTab" inline-label class="bg-grey-3 text-teal">
+        <q-tab name="Hoje" label="Hoje" />
+        <q-tab name="7dias" label="7 Dias" />
+        <q-tab name="30dias" label="30 dias" />
+        <q-tab name="todoperiodo" label="Todo periodo" />
+      </q-tabs>
     </div>
-  </q-page>
+
+    <div class="col">
+      <q-tab-panels v-model="currentTab" animated>
+        <!--primeiro tab-->
+        <q-tab-panel name="Hoje">
+          <q-timeline layout="comfortable" color="secondary">
+            <q-timeline-entry
+              v-for="dado in dados"
+              :key="dado.id"
+              :title="dado.tipoGanho"
+              :subtitle="dado.dataGanho"
+              icon="mdi-cash"
+            >
+              <div>
+                {{ dado.nomeGanho }}
+              </div>
+              <div>
+                {{ dado.valorGanho }}
+              </div>
+            </q-timeline-entry>
+          </q-timeline>
+        </q-tab-panel>
+        <!--segundo  tab-->
+        <q-tab-panel name="7dias">
+          Ganhos de 7dias
+
+        </q-tab-panel>
+      </q-tab-panels>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -35,14 +53,14 @@ export default defineComponent({
     const { user } = useAuthUser();
     const { notifyError } = useNotify();
     const { list } = useApi();
-    const loading = ref(true)
+    const loading = ref(true);
     const dados = ref([]);
 
     const loadDados = async () => {
       try {
-        loading.value = true
+        loading.value = true;
         dados.value = await list("ganhosteste");
-        loading.value = false
+        loading.value = false;
         console.log(dados.value);
       } catch (error) {
         notifyError(error.message);
@@ -56,6 +74,7 @@ export default defineComponent({
       loading,
       onMounted,
       dados,
+      currentTab: ref("Hoje"),
     };
   },
 });

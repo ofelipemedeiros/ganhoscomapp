@@ -1,7 +1,7 @@
 <template>
   <q-layout view="lHh Lpr lFf">
     <q-header  >
-      <q-toolbar class="col-xs-12">
+      <q-toolbar class="col-xs-12 bg-orange-6 " >
         <q-btn push padding="0px" icon="arrow_back" flat  to="/profile"/>
         <q-toolbar-title>Abastecimento</q-toolbar-title>
         <q-space/>

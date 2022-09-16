@@ -1,29 +1,7 @@
 <template>
+
   <q-layout view="lHh Lpr lFf">
-    <q-tabs
-        v-model="currentTab"
-        inline-label
-        class="bg-grey-3 text-teal"
-      >
-        <q-tab name="Hoje"  label="Hoje" />
-        <q-tab name="7dias" label="7 Dias" />
-        <q-tab name="30dias" label="30 dias" />
-        <q-tab name="todoperiodo" label="Todo periodo" />
-      </q-tabs>
-      <q-tab-panels v-model="currentTab" animated>
-        <q-tab-panel
-        name="Hoje"
-        >
-        Ganhos de Hoje
 
-        </q-tab-panel>
-        <q-tab-panel
-        name="7dias"
-        >
-        Ganhos de 7dias
-
-        </q-tab-panel>
-      </q-tab-panels>
     <q-page-container>
       <router-view />
       <q-page-sticky position="bottom-right" :offset="[18, 18]">
@@ -99,7 +77,7 @@ export default defineComponent({
     return {
       deslogar,
       tab: ref('mails'),
-      currentTab: ref('Hoje')
+
     };
 
   },
