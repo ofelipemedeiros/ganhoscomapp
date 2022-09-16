@@ -1,11 +1,15 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <q-header>
-      <q-toolbar>
-        <q-toolbar-title> Ganhos com app </q-toolbar-title>
-        <q-btn flat round dense icon="logout" @click="deslogar" />
-      </q-toolbar>
-    </q-header>
+    <q-tabs
+        v-model="tab"
+        inline-label
+        class="text-teal"
+      >
+        <q-tab name="Hoje"  label="Hoje" />
+        <q-tab name="7dias" label="7 Dias" />
+        <q-tab name="30dias" label="30 dias" />
+        <q-tab name="todoperiodo" label="Todo periodo" />
+      </q-tabs>
     <q-page-container>
       <router-view />
       <q-page-sticky position="bottom-right" :offset="[18, 18]">
@@ -50,11 +54,11 @@
   </q-layout>
 </template>
 <script>
-import { defineComponent } from "vue";
+import { defineComponent, ref } from "vue";
 import useAuthUser from "src/composables/useAuthUser";
 import { useRouter } from "vue-router";
 import PageMe from "src/pages/PageMe.vue";
-import PageProfile from "src/pages/PageProfile.vue";
+
 
 
 
@@ -62,7 +66,7 @@ export default defineComponent({
   name: "ProfileLogin",
   components: {
     PageMe,
-    PageProfile
+
   },
 
   setup() {
@@ -79,7 +83,8 @@ export default defineComponent({
     }
 
     return {
-      deslogar
+      deslogar,
+      tab: ref('mails')
     };
 
   },
