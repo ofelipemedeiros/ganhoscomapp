@@ -2,7 +2,7 @@
   <q-page padding>
     <q-form class="row justify-center" @submit.prevent="handleSubmit">
       <div class="col-md-4 col-sm-6 col-xs-10 q-gutter-y-md">
-        <q-input v-model="form.dataGanho">
+        <q-input v-model="form.data_receitas">
           <template v-slot:prepend>
             <q-icon name="event" class="cursor-pointer">
               <q-popup-proxy
@@ -10,7 +10,7 @@
                 transition-show="scale"
                 transition-hide="scale"
               >
-                <q-date v-model="form.dataGanho" :locale="localidade">
+                <q-date v-model="form.data_receitas" :locale="localidade">
                   <div class="row items-center justify-end">
                     <q-btn v-close-popup label="Close" color="primary" flat />
                   </div>
@@ -20,17 +20,22 @@
           </template>
         </q-input>
         <q-select
-          v-model="form.tipoGanho"
-          :options="opçõesGanho"
-          label="Fonte do ganho"
+          v-model="form.fk_tipo_receita"
+          :options="opcao_tipoReceita"
+          emit-value
+          map-options
+          label="Tipo Receita"
         >
           <template v-slot:before>
             <q-icon name="mdi-cash" />
           </template>
         </q-select>
         <q-select
-          v-model="form.nomeGanho"
-          :options="opçõesApp"
+          v-model="form.fk_app"
+          :options="opcao_App"
+          emit-value
+          map-options
+
           label="Fonte do ganho"
         >
           <template v-slot:before>
@@ -39,7 +44,7 @@
         </q-select>
         <q-input
           color="teal"
-          v-model="form.valorGanho"
+          v-model="form.valor_receitas"
           label="valor"
           type="number"
         >
@@ -79,17 +84,17 @@ export default defineComponent({
   setup() {
     const { notifyError, notifySuccess } = useNotify();
     const { supabase } = useSupabase();
-    const table = "ganhosteste";
+    const table = "receitas";
     const router = useRouter();
     const { post } = useApi();
     const { user } = useAuthUser();
 
     const form = ref({
-      tipoGanho: null,
-      nomeGanho: null,
-      valorGanho: null,
+      fk_tipo_receita: null,
+      fk_app: null,
+      valor_receitas: null,
       user_id: user.id,
-      dataGanho:''
+      data_receitas:''
     });
 
     const handleSubmit = async () => {
@@ -119,8 +124,36 @@ export default defineComponent({
         format24h: true,
         pluralDay: "dias",
       },
-      opçõesGanho: ["Aplicativos", "Corrida Particular", "Gorjeta", "Outros"],
-      opçõesApp: ["Uber", "99pop", "indriver"],
+      opcao_tipoReceita: [{
+        label: 'Aplicativo',
+        value: 1
+      },
+      {
+        label: 'Corrida Particular',
+        value: 2
+      },
+    {
+      label:  'Gorjeta',
+      value: 3
+    },
+    {
+      label:  'Outros',
+      value: 4
+    }],
+      opcao_App: [
+        {
+          label: 'Uber',
+          value: 1
+        },
+        {
+          label: 'Indriver',
+          value: 2
+        },
+        {
+          label: '99pop',
+          value: 3
+        }
+      ],
       form,
       handleSubmit,
     };

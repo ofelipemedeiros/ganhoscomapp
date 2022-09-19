@@ -2,7 +2,7 @@
   <q-page padding>
     <q-form class="row justify-center" @submit.prevent="handleSubmit">
       <div class="col-md-4 col-sm-6 col-xs-10 q-gutter-y-md">
-        <q-input v-model="form.data_combustivel">
+        <q-input v-model="form.data_despesa">
           <template v-slot:prepend>
             <q-icon name="event" class="cursor-pointer">
               <q-popup-proxy
@@ -10,7 +10,7 @@
                 transition-show="scale"
                 transition-hide="scale"
               >
-                <q-date v-model="form.data_combustivel" :locale="localidade">
+                <q-date v-model="form.data_despesa" :locale="localidade">
                   <div class="row items-center justify-end">
                     <q-btn v-close-popup label="Close" color="primary" flat />
                   </div>
@@ -20,8 +20,10 @@
           </template>
         </q-input>
         <q-select
-          v-model="form.tipo_combustivel"
-          :options="opçõesCombus"
+          v-model="form.fk_combustivel"
+          :options="opcao_tipo_combustivel"
+          emit-value
+          map-options
           label="Tipo  de Combustivel"
         >
           <template v-slot:before>
@@ -30,7 +32,7 @@
         </q-select>
         <q-input
           color="teal"
-          v-model="form.valor_combustivel"
+          v-model="form.valor_despesa"
           label="valor"
           type="number"
         >
@@ -70,16 +72,18 @@ export default defineComponent({
   setup() {
     const { notifyError, notifySuccess } = useNotify();
     const { supabase } = useSupabase();
-    const table = "abastecimentos";
+    const table = "despesas";
     const router = useRouter();
     const { post } = useApi();
     const { user } = useAuthUser();
 
     const form = ref({
-      tipo_combustivel: null,
-      valor_combustivel: null,
+      data_despesa:'',
       user_id: user.id,
-      data_combustivel:''
+      fk_combustivel: null,
+      valor_despesa: null,
+
+
     });
 
     const handleSubmit = async () => {
@@ -109,7 +113,28 @@ export default defineComponent({
         format24h: true,
         pluralDay: "dias",
       },
-      opçõesCombus: ["Gasolina Comum", "Gasolina Aditivada", "Gasolina Premium", "Etanol", "Diesel"],
+      opcao_tipo_combustivel: [
+        {
+          label: 'Gasolina Comum',
+          value: 1
+        },
+        {
+          label:  'Gasolina Aditivada',
+          value: 2
+        },
+        {
+          label:  'Etano Comum',
+          value: 3
+        },
+        {
+          label: "Etanol Aditivado",
+          value: 4
+        },
+        {
+          label: 'Diesel',
+          value: 5
+        }
+      ],
       form,
       handleSubmit,
     };

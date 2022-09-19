@@ -17,15 +17,15 @@
             <q-timeline-entry
               v-for="dado in dados"
               :key="dado.id"
-              :title="dado.tipoGanho"
-              :subtitle="dado.dataGanho"
+              :title="dado.tipo_receitas.nome_tipo_receita"
+              :subtitle="dado.data_receitas"
               icon="mdi-cash"
             >
               <div>
-                {{ dado.nomeGanho }}
+                {{ dado.aplicativos.nome_app }}
               </div>
               <div>
-                {{ dado.valorGanho }}
+                {{ dado.valor_receitas }}
               </div>
             </q-timeline-entry>
           </q-timeline>
@@ -52,14 +52,14 @@ export default defineComponent({
   setup() {
     const { user } = useAuthUser();
     const { notifyError } = useNotify();
-    const { list } = useApi();
+    const { list, listReceitas } = useApi();
     const loading = ref(true);
     const dados = ref([]);
 
     const loadDados = async () => {
       try {
         loading.value = true;
-        dados.value = await list("ganhosteste");
+        dados.value = await listReceitas("receitas");
         loading.value = false;
         console.log(dados.value);
       } catch (error) {
