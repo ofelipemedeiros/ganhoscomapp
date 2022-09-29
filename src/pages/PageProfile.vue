@@ -11,6 +11,7 @@
 
     <div class="col">
       <q-tab-panels v-model="currentTab" animated>
+
         <!--primeiro tab-->
         <q-tab-panel name="Hoje">
           <q-timeline layout="comfortable" color="secondary">
@@ -30,12 +31,75 @@
             </q-timeline-entry>
           </q-timeline>
         </q-tab-panel>
-        <!--segundo  tab-->
-        <q-tab-panel name="7dias">
-          Ganhos de 7dias
+        <!--primeiro tab-->
+
+
+        <!--Terceiro  tab 30dias-->
+        <q-tab-panel name="30dias">
+          <q-timeline  layout="comfortable" color="secondary">
+            <q-timeline-entry
+              v-for="dado in dados30dias"
+              :key="dado.id"
+              :title="dado.tipo_receitas.nome_tipo_receita"
+              :subtitle="dado.data_receitas"
+              icon="mdi-cash"
+            >
+              <div>
+                {{ dado.aplicativos.nome_app }}
+              </div>
+              <div>
+                {{ dado.valor_receitas }}
+              </div>
+            </q-timeline-entry>
+          </q-timeline>
 
         </q-tab-panel>
+
+        <!--Terceir  tab-->
+        <q-tab-panel name="7dias">
+          <q-timeline  color="secondary">
+            <q-timeline-entry
+              v-for="dado in dados7dias"
+              :key="dado.id"
+              :title="dado.tipo_receitas.nome_tipo_receita"
+              :subtitle="dado.data_receitas"
+              icon="mdi-cash"
+            >
+              <div>
+                {{ dado.aplicativos.nome_app }}
+              </div>
+              <div>
+                {{ dado.valor_receitas }}
+              </div>
+            </q-timeline-entry>
+          </q-timeline>
+
+        </q-tab-panel>
+
+        <!--Quarta todo periodo tab-->
+        <q-tab-panel name="todoperiodo">
+          <q-timeline  color="secondary">
+            <q-timeline-entry
+              v-for="dado in dadosTodoPeriodo"
+              :key="dado.id"
+              :title="dado.tipo_receitas.nome_tipo_receita"
+              :subtitle="dado.data_receitas"
+              icon="mdi-cash"
+            >
+              <div>
+                {{ dado.aplicativos.nome_app }}
+              </div>
+              <div>
+                {{ dado.valor_receitas }}
+              </div>
+            </q-timeline-entry>
+          </q-timeline>
+        </q-tab-panel>
+
+
+
       </q-tab-panels>
+
     </div>
   </div>
 </template>
@@ -52,16 +116,21 @@ export default defineComponent({
   setup() {
     const { user } = useAuthUser();
     const { notifyError } = useNotify();
-    const { list, listReceitas } = useApi();
+    const { list, listReceitas, list7dias, list30dias, todoPeriodo } = useApi();
     const loading = ref(true);
     const dados = ref([]);
+    const dados7dias = ref([]);
+    const dados30dias = ref([])
+    const dadosTodoPeriodo = ref([])
 
     const loadDados = async () => {
       try {
         loading.value = true;
         dados.value = await listReceitas("receitas");
+        dados7dias.value = await list7dias("receitas")
+        dadosTodoPeriodo.value = await todoPeriodo("receitas")
+        dados30dias.value = await list30dias("receitas")
         loading.value = false;
-        console.log(dados.value);
       } catch (error) {
         notifyError(error.message);
       }
@@ -74,6 +143,9 @@ export default defineComponent({
       loading,
       onMounted,
       dados,
+      dados7dias,
+      dados30dias,
+      dadosTodoPeriodo,
       currentTab: ref("Hoje"),
     };
   },

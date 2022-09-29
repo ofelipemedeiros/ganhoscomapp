@@ -1,5 +1,8 @@
 
+import { isDate } from '@vue/shared'
+import { date } from 'quasar'
 import useSupabase from 'src/boot/supabase'
+import { getCurrentInstance } from 'vue'
 import useAuthUser from './useAuthUser'
 export default function useApi() {
   const { supabase } = useSupabase()
@@ -18,23 +21,60 @@ export default function useApi() {
     return data
   }
   const listReceitas = async (table) => {
-  const { data, error } = await supabase.from(table).select(`data_receitas, valor_receitas,fk_tipo_receita,fk_app, tipo_receitas (nome_tipo_receita), aplicativos(nome_app)`)
-  if(error) throw error
-  return data
+
+    const d = new Date()
+    //const d2 = new Date()
+    d.setDate(d.getDate() -1)
+    //d2.setDate(d2.getDate() + 7)
+    //const date = d.toLocaleDateString(d)
+    // const dt = d.toLocaleDateString()
+     //const dmsete = d2.toLocaleDateString(d2)
+    const d5 = d.toISOString(d).substring(0, 10)
+    const { data, error } = await supabase.from(table)
+      .select(`data_receitas, valor_receitas,fk_tipo_receita,fk_app, tipo_receitas (nome_tipo_receita), aplicativos(nome_app)`)
+      .order('data_receitas', { ascending: false })
+      .gte('data_receitas', d5)
+    if (error) throw error
+    return data
   }
 
-  // const listReceitas = async (table) => {
-  //   const { data, error } = await supabase.from(table).select(`
-  //   data_receitas,valor_receitas, tipo_receita fk_tipo_receita,
-  //   tipo_receitas (
+  const list7dias = async (table) => {
+    const d = new Date()
+    d.setDate(d.getDate() - 7)
+    const d5 = d.toISOString(d).substring(0, 10)
+    const { data, error } = await supabase.from(table)
+      .select(`data_receitas, valor_receitas,fk_tipo_receita,fk_app, tipo_receitas (nome_tipo_receita), aplicativos(nome_app)`)
+      .order('data_receitas', { ascending: false })
+      .gte('data_receitas', d5)
 
-  //     id_tipo_receita
 
-  //   )
-  // `)
-  // if(error) throw error
-  // return data
-  // }
+    if (error) throw error
+    return data
+  }
+
+  const list30dias = async (table) => {
+    const d = new Date()
+    d.setDate(d.getDate() - 30)
+    const d5 = d.toISOString(d).substring(0, 10)
+    const { data, error } = await supabase.from(table)
+      .select(`data_receitas, valor_receitas,fk_tipo_receita,fk_app, tipo_receitas (nome_tipo_receita), aplicativos(nome_app)`)
+      .order('data_receitas', { ascending: false })
+      .gte('data_receitas', d5)
+
+
+    if (error) throw error
+    return data
+  }
+
+  const todoPeriodo = async (table) => {
+    const { data, error } = await supabase.from(table)
+      .select(`data_receitas, valor_receitas,fk_tipo_receita,fk_app, tipo_receitas (nome_tipo_receita), aplicativos(nome_app)`)
+      .order('data_receitas', { ascending: false })
+    if (error) throw error
+    return data
+  }
+
+
 
 
   const getById = async (table, id) => {
@@ -87,6 +127,9 @@ export default function useApi() {
 
   return {
     list,
+    list7dias,
+    list30dias,
+    todoPeriodo,
     getById,
     post,
     update,

@@ -79,7 +79,6 @@ export default defineComponent({
     });
 
 
-
     const handleLogin = async () => {
       try {
         await login(form.value);
@@ -92,7 +91,6 @@ export default defineComponent({
     const loginWithSocialProvider = async () => {
       try {
         await loginWithGoogle("google");
-
       } catch (error) {}
     };
 

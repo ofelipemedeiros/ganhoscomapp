@@ -76,6 +76,7 @@ export default defineComponent({
 
     return {
       deslogar,
+
       tab: ref('mails'),
 
     };
